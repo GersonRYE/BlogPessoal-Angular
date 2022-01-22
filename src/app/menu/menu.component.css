@@ -1,0 +1,12 @@
+.fs-16{
+font-size: 16pt;
+}
+
+.rounded-circle{
+    border: 2px solid red;
+    height: 50px;
+}
+
+a{
+    cursor: pointer;
+}
