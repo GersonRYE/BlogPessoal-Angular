@@ -1,7 +1,7 @@
-import { PostagemModel } from "./PostagemModel";
+import { PostagemModel } from './PostagemModel';
 
 export class TemaModel {
-    public id: string;
-    public descricao: string;
-    public postagem: PostagemModel[]
+  public id: number;
+  public descricao: string;
+  public postagem: PostagemModel[];
 }
