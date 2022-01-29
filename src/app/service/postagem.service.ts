@@ -23,4 +23,7 @@ export class PostagemService {
     return this.http.post<PostagemModel>('https://bloggrye.herokuapp.com/postagens', postagem, this.token)
   } 
 
+  getByIdPostagem(id: number): Observable<PostagemModel>{
+    return this.http.get<PostagemModel>(`https://bloggrye.herokuapp.com/postagens/${id}`, this.token)
+  }
 }

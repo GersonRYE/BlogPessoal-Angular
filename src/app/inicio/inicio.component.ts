@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from 'auth.service';
+
 import { environment } from 'src/environments/environment.prod';
 import { PostagemModel } from '../model/PostagemModel';
 import { TemaModel } from '../model/TemaModel';
 import { UsuarioModel } from '../model/UsuarioModel';
+import { AuthService } from '../service/auth.service';
 import { PostagemService } from '../service/postagem.service';
 import { TemaService } from '../service/tema.service';
 
@@ -14,7 +15,7 @@ import { TemaService } from '../service/tema.service';
   styleUrls: ['./inicio.component.css'],
 })
 export class InicioComponent implements OnInit {
-  listaPostagens: PostagemModel[]
+  listaPostagens: PostagemModel[];
   postagem: PostagemModel = new PostagemModel();
   tema: TemaModel = new TemaModel();
   listaTemas: TemaModel[];
@@ -38,6 +39,7 @@ export class InicioComponent implements OnInit {
 
     this.getAllTemas();
     this.getAllPostagens();
+    this.authService.refreshToken();
   }
 
   getAllTemas() {
@@ -52,13 +54,21 @@ export class InicioComponent implements OnInit {
     });
   }
 
-  getAllPostagens(){
-    this.postagemService.getAllPostagens().subscribe((resp: PostagemModel[]) => {
-      this.listaPostagens = resp
-    })
+  getAllPostagens() {
+    this.postagemService
+      .getAllPostagens()
+      .subscribe((resp: PostagemModel[]) => {
+        this.listaPostagens = resp;
+      });
   }
-  
-  
+
+  findByIdUser() {
+    this.authService
+      .getByIdUser(this.idUser)
+      .subscribe((resp: UsuarioModel) => {
+        this.user = resp;
+      });
+  }
 
   publicar() {
     this.tema.id = this.idTema;
@@ -72,8 +82,8 @@ export class InicioComponent implements OnInit {
       .subscribe((resp: PostagemModel) => {
         this.postagem = resp;
         alert('Postagem realizada com sucesso');
-        this.postagem = new PostagemModel()
-        this.getAllPostagens()
+        this.postagem = new PostagemModel();
+        this.getAllPostagens();
       });
   }
 }
