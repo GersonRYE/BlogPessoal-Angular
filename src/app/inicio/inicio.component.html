@@ -65,12 +65,13 @@
         		<div class="card text-center" *ngFor="let meuItem of user.postagem">
           			<div class="card-body">
             			<h5 class="card-title m-0">{{ meuItem.titulo }}</h5>
-						<small class="text-muted">Tema: {{ meuItem.tema.descricao }}</small>
-						<p class="card-text mt-3">{{ meuItem.texto }}</p>
-						<p class="card-text">
-						<small class="text-muted">{{ meuItem.data | date: "dd/MM/yyyy" }} às {{ meuItem.data | date: "HH:mm" }}</small>
-						</p>
+						      <small class="text-muted">Tema: {{ meuItem.tema.descricao }}</small>
+						      <p class="card-text mt-3">{{ meuItem.texto }}</p>
+						      <p class="card-text">
+						      <small class="text-muted">{{ meuItem.data | date: "dd/MM/yyyy" }} às {{ meuItem.data | date: "HH:mm" }}</small></p>
             			<p class="card-text"><small class="text-muted"> by: {{ user.nome }}</small></p>
+                  <a [routerLink]="['/postagem-edit', meuItem.id]" class="text-info mr-3" href="">Editar</a>
+                  <a [routerLink]="['/postagem-delete', meuItem.id]" class="text-danger" href="">Apagar</a>
           			</div>
         		</div>
       		</div>
@@ -94,80 +95,37 @@
 </div>
 
 <!-- Modal -->
-<div
-  class="modal fade"
-  id="novaPostagem"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="TituloModalCentralizado"
-  aria-hidden="true"
->
+<div class="modal fade" id="novaPostagem" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado"aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="TituloModalCentralizado">Nova Postagem</h5>
-        <button
-          type="button"
-          class="close"
-          data-dismiss="modal"
-          aria-label="Fechar"
-        >
-          <span aria-hidden="true">&times;</span>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+        <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <div class="for-group">
           <label for="titulo">Titulo</label>
-          <input
-            [(ngModel)]="postagem.titulo"
-            type="text"
-            class="form-control"
-            id="titulo"
-            placeholder="Digite o titulo"
-          />
+          <input [(ngModel)]="postagem.titulo" type="text" class="form-control" id="titulo" placeholder="Digite o titulo"/>
         </div>
-        <div class="for-group">
+        <div class="for-group"> 
           <label for="texto">Texto</label>
-          <textarea
-            [(ngModel)]="postagem.texto"
-            class="form-control"
-            name="texto"
-            id="texto"
-            rows="3"
-          >
+          <textarea [(ngModel)]="postagem.texto" class="form-control" name="texto" id="texto" rows="3">
           </textarea>
         </div>
         <div class="for-group">
-          <label for="texto"
-            >Escolha um tema ou<a data-dismiss="modal" routerLink="/tema">
-              cadastre um novo</a
-            >:
+          <label for="texto">Escolha um tema ou<a data-dismiss="modal" routerLink="/tema">cadastre um novo</a>:
           </label>
-          <select
-            name="tema"
-            id="tema"
-            class="form-control"
-            [(ngModel)]="idTema"
-            (change)="findByIdTema()"
-          >
-            <option *ngFor="let item of listaTemas" value="{{ item.id }}">
-              {{ item.descricao }}
+          <select name="tema" id="tema" class="form-control" [(ngModel)]="idTema" (change)="findByIdTema()">
+            <option *ngFor="let item of listaTemas" value="{{ item.id }}">{{ item.descricao }}
             </option>
           </select>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">
-          Cancelar
-        </button>
-        <button
-          type="button"
-          class="btn btn-success"
-          (click)="publicar()"
-          data-dismiss="modal"
-        >
-          Publicar
-        </button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-success" (click)="publicar()" data-dismiss="modal">Publicar</button>
       </div>
     </div>
   </div>

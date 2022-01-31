@@ -19,11 +19,19 @@ export class PostagemService {
     return this.http.get<PostagemModel[]>('https://bloggrye.herokuapp.com/postagens', this.token)
   }
 
+  getByIdPostagem(id: number): Observable<PostagemModel>{
+    return this.http.get<PostagemModel>(`https://bloggrye.herokuapp.com/postagens/${id}`, this.token)
+  }
+
   postPostagem(postagem: PostagemModel): Observable<PostagemModel>{
     return this.http.post<PostagemModel>('https://bloggrye.herokuapp.com/postagens', postagem, this.token)
   } 
 
-  getByIdPostagem(id: number): Observable<PostagemModel>{
-    return this.http.get<PostagemModel>(`https://bloggrye.herokuapp.com/postagens/${id}`, this.token)
+  putPostagem(postagem: PostagemModel):Observable<PostagemModel>{
+    return this.http.put<PostagemModel>('https://bloggrye.herokuapp.com/postagens', postagem, this.token)
+  }
+
+  deletePostagem(id: number){
+    return this.http.delete(`https://bloggrye.herokuapp.com/postagens/${id}`, this.token)
   }
 }
