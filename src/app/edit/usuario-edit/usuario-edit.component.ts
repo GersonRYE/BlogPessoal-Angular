@@ -49,7 +49,7 @@ export class UsuarioEditComponent implements OnInit {
       alert('As senhas estão incorretas');
     } else {
       this.authService
-        .cadastrar(this.usuarioModel)
+        .atualizar(this.usuarioModel)
         .subscribe((resp: UsuarioModel) => {
           this.usuarioModel = resp
           alert('Usuário atualizado com sucesso!')

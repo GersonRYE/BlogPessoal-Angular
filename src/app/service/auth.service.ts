@@ -35,6 +35,10 @@ export class AuthService {
     );
   }
 
+  atualizar(usuarioModel: UsuarioModel): Observable<UsuarioModel>{
+    return this.http.put<UsuarioModel>("https://bloggrye.herokuapp.com/usuarios/atualizar", usuarioModel, this.token)
+  }
+
   getByIdUser(id: number): Observable<UsuarioModel> {
     return this.http.get<UsuarioModel>(
       `https://bloggrye.herokuapp.com/usuarios/${id}`,
