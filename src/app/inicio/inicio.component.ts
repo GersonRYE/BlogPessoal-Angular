@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment.prod';
 import { PostagemModel } from '../model/PostagemModel';
 import { TemaModel } from '../model/TemaModel';
 import { UsuarioModel } from '../model/UsuarioModel';
+import { AlertasService } from '../service/alertas.service';
 import { AuthService } from '../service/auth.service';
 import { PostagemService } from '../service/postagem.service';
 import { TemaService } from '../service/tema.service';
@@ -28,7 +29,8 @@ export class InicioComponent implements OnInit {
     private router: Router,
     private postagemService: PostagemService,
     private temaService: TemaService,
-    private authService: AuthService
+    private authService: AuthService, 
+    private alertas: AlertasService
   ) {}
 
   ngOnInit() {
@@ -83,7 +85,7 @@ export class InicioComponent implements OnInit {
       .postPostagem(this.postagem)
       .subscribe((resp: PostagemModel) => {
         this.postagem = resp;
-        alert('Postagem realizada com sucesso');
+        this.alertas.showAlertSuccess('Postagem realizada com sucesso');
         this.postagem = new PostagemModel();
         this.getAllPostagens();
       });
