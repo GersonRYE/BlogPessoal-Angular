@@ -48,7 +48,7 @@
   	<div class="tab-content mt-5" id="myTabContent">
 		<div class="tab-pane fade show active" id="todasPostagens" role="tabpanel" aria-labelledby="todasPostagens-tab">
       		<div class="card-columns">
-        		<div class="card text-center" *ngFor='let item of listaPostagens'>
+        		<div class="card text-center" *ngFor='let item of listaPostagens | orderBy : key : reverse'>
           			<div class="card-body">
             			<h5 class="card-title m-0">{{ item.titulo }}</h5>
             			<small class="text-muted">Tema: {{ item.tema.descricao }}</small>
@@ -62,7 +62,7 @@
     	</div>
     	<div class="tab-pane fade" id="minhasPostagens" role="tabpanel" aria-labelledby="minhasPostagens-tab">
       		<div class="card-columns">
-        		<div class="card text-center" *ngFor="let meuItem of user.postagem">
+        		<div class="card text-center" *ngFor="let meuItem of user.postagem | orderBy : key : reverse">
           			<div class="card-body">
             			<h5 class="card-title m-0">{{ meuItem.titulo }}</h5>
 						      <small class="text-muted">Tema: {{ meuItem.tema.descricao }}</small>
@@ -79,7 +79,7 @@
     	<div class="tab-pane fade" id="postagensPorTema" role="tabpanel" aria-labelledby="nav-postagensPorTema-tab">
 			<div class="card-columns">
 				<div *ngFor="let filtroTema of listaTemas">
-					<div class="card text-center" *ngFor="let filtroItem of filtroTema.postagem">
+					<div class="card text-center" *ngFor="let filtroItem of filtroTema.postagem | orderBy : key : reverse">
 					  <div class="card-body">
 						  <h5 class="card-title m-0">{{ filtroItem.titulo }}</h5>
 						  <p class="card-text mt-3">{{ filtroItem.texto }}</p>
