@@ -16,7 +16,7 @@
           >
             Nova Postagem
           </button>
-          <a class="btn btn-outline-light" href="#postagens">Ver Postagem</a>
+          <a *ngIf="authService.adm()" class="btn btn-outline-light" href="#postagens">Ver Postagem</a>
         </div>
       </div>
     </div>
