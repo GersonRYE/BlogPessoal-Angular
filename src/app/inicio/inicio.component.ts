@@ -18,26 +18,29 @@ import { TemaService } from '../service/tema.service';
 export class InicioComponent implements OnInit {
   listaPostagens: PostagemModel[];
   postagem: PostagemModel = new PostagemModel();
+  tituloPost: string;
+
   tema: TemaModel = new TemaModel();
   listaTemas: TemaModel[];
   idTema: number;
+  descricaoTema: string
 
   user: UsuarioModel = new UsuarioModel();
   idUser = environment.id;
 
-  key = 'data'
-  reverse = true
+  key = 'data';
+  reverse = true;
 
   constructor(
     private router: Router,
     private postagemService: PostagemService,
     private temaService: TemaService,
-    private authService: AuthService, 
+    private authService: AuthService,
     private alertas: AlertasService
   ) {}
 
   ngOnInit() {
-    window.scroll(0,0)
+    window.scroll(0, 0);
 
     if (environment.token == '') {
       alert('Sua seção expirou, faça o login novamente!');
@@ -92,5 +95,26 @@ export class InicioComponent implements OnInit {
         this.postagem = new PostagemModel();
         this.getAllPostagens();
       });
+  }
+
+  findByTituloPostagem() {
+    if (this.tituloPost == '') {
+      this.getAllPostagens();
+    } else {
+      this.postagemService.getByTituloPostagem(this.tituloPost).subscribe((resp: PostagemModel[]) => {
+          this.listaPostagens = resp;
+        });
+    }
+  }
+
+  findByDescricaoTema(){
+    if(this.descricaoTema == ''){
+      this.getAllTemas()
+    }else{
+      this.temaService.getByDescricaoTema(this.descricaoTema).subscribe((resp: TemaModel[]) => {
+        this.listaTemas = resp
+      })
+    }
+
   }
 }
